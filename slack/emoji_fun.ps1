@@ -17,8 +17,8 @@ $splat = @{'Uri'  = "https://hooks.slack.com/services/$webhook"
 [int]$x = '1'   
 while ($x -le 50 ) {
     $x++
-    $message = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/github/gemoji/master/db/emoji.json" | Sort-Object {Get-Random} | Select-Object -Last 1
-    $final
-    $emoji_message = (":" + $final + ":")
+    $message = (Invoke-RestMethod -Uri "https://raw.githubusercontent.com/github/gemoji/master/db/emoji.json") | Sort-Object {Get-Random} | Select-Object -Last 1
+    $message.emoji
+    $emoji_message = (":" + $message.description + ":")
     Send-SlackMessage -Message "$emoji_message" -Webhook "here"
 }
